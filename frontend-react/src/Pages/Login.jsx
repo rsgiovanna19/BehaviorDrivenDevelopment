@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
-import Carousel from '../Components/Carousel';
 import axios from 'axios';
-import InputField from '../Components/InputField';
-import ErrorMessage from '../Components/ErrorMessage';
-import Message from '../Components/Message';
 import { useNavigate } from 'react-router-dom';
 import { useError } from '../Context/ErrorContext';
 import { useMessage } from '../Context/MessageContext';
+import ErrorMessage from '../Components/ErrorMessage';
+import Message from '../Components/Message';
+import { motion } from 'framer-motion';
 
-function Login() {
+const containerVariants = {
+  hidden: { opacity: 0, scale: 0.98, y: 30 },
+  visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
+  exit: { opacity: 0, scale: 0.98, y: -30, transition: { duration: 0.3, ease: 'easeIn' } }
+};
+
+export default function Login() {
   const { showError, errorMsg, clearError } = useError();
-  const { showMessage, message, clearMessage } = useMessage();
+  const { message, clearMessage } = useMessage();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -21,86 +26,94 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (formData.email === '' || formData.senha === '') {
-      showError("Um ou mais campos se encontra vazio.");
+    if (!formData.email || !formData.senha) {
+      showError("Todos os campos são obrigatórios.");
       return;
     }
 
     try {
-      const response = await axios.post("http://localhost:5294/api/validar-login", formData);
+      const response = await axios.post("http://localhost:5294/api/usuario/validar-login", formData);
       const user = response.data;
 
-      if (user) {
-        localStorage.setItem("userEmail", user.email);
-        localStorage.setItem("logado", true);
-        localStorage.setItem("userType", user.tipo);
-        localStorage.setItem("user", user.id);
-
-        setFormData({ email: '', senha: '' });
-
-        if (user.tipo === 1) {
-          navigate('/cadastrar-marmita');
-        } else {
-          navigate('/home');
-        }
-      }
+      localStorage.setItem("userEmail", user.email);
+      localStorage.setItem("logado", true);
+      localStorage.setItem("userType", user.tipo);
+      localStorage.setItem("user", user.id);
+      localStorage.setItem("userName", user.nome);
+      navigate('/home');
     } catch (error) {
-      showError("Erro ao tentar efetuar login: " + (error.response?.data || error.message));
+      showError("Erro ao fazer login: " + (error.response?.data || error.message));
     }
   };
 
   return (
-    <div className='min-h-screen flex justify-end bg-orange-500'>
-      {errorMsg && (
-        <ErrorMessage msg={errorMsg} onClose={clearError} />
-      )}
-      {message && (
-        <Message msg={message} onClose={clearMessage} />
-      )}
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1c1c1e] to-[#3a3a3c] px-4">
+      {errorMsg && <ErrorMessage msg={errorMsg} onClose={clearError} />}
+      {message && <Message msg={message} onClose={clearMessage} />}
 
-      <div className="w-2/3 flex items-center justify-center bg-orange-500">
-        <Carousel />
-      </div>
+      <motion.div
+        className="w-full max-w-5xl bg-white rounded-3xl overflow-hidden shadow border border-gray-200 grid grid-cols-1 md:grid-cols-2"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+      >
+        {/* Lado esquerdo com logo */}
+        <div className="hidden md:flex items-center justify-center bg-white p-12">
+          <img
+            src="/logo.png"
+            alt="EducaTech Logo"
+            className="w-100 object-contain"
+          />
+        </div>
 
-      <div className="min-h-screen w-1/3 flex justify-center items-center bg-white p-8 shadow-lg">
-        <form className="w-full max-w-sm flex flex-col" onSubmit={handleSubmit}>
-          <div className="flex flex-col items-center mb-4">
-            <img src="/leozitos marmitaria.png" alt="Logo" className="h-50 w-auto object-contain" />
-            <h3 className='text-red-500 font-bold mb-4'>Peça já sua marmita!</h3>
+        {/* Lado direito: formulário */}
+        <div className="p-10 flex flex-col justify-center">
+          {/* Logo topo (mobile) */}
+          <div className="flex justify-center mb-8 md:hidden">
+            <img
+              src="/logo.png"
+              alt="EducaTech Logo"
+              className="h-20 object-contain"
+            />
           </div>
 
-          <h2 className="text-4xl font-bold text-center text-black-500 mb-4">Seja bem vindo!</h2>
+          <h1 className="text-3xl font-semibold text-[#1d1d1f] mb-6 text-center">Bem-vindo de volta</h1>
 
-          <InputField
-            label="Email:"
-            id="email"
-            type="email"
-            placeholder="Digite seu email"
-            value={formData.email}
-            onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          />
+          <form className="space-y-5" onSubmit={handleSubmit}>
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Email</label>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={e => setFormData({ ...formData, email: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black outline-none transition"
+              />
+            </div>
 
-          <InputField
-            label="Senha:"
-            id="senha"
-            type="password"
-            placeholder="Digite sua senha"
-            value={formData.senha}
-            onChange={(e) => setFormData({ ...formData, senha: e.target.value })}
-          />
+            <div>
+              <label className="block text-sm text-gray-700 mb-1">Senha</label>
+              <input
+                type="password"
+                value={formData.senha}
+                onChange={e => setFormData({ ...formData, senha: e.target.value })}
+                className="w-full px-4 py-2 border border-gray-300 rounded-xl focus:ring-2 focus:ring-black outline-none transition"
+              />
+            </div>
 
-          <div className="flex flex-col gap-2 mt-10">
-            <button type="submit" className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition">
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-2 rounded-xl hover:opacity-90 transition"
+            >
               Entrar
             </button>
-            <a href="/cadastro" className="bg-red-500 text-white py-2 px-4 rounded hover:bg-red-700 transition text-center">
-              Cadastrar
-            </a>
-          </div>
-        </form>
-      </div>
+
+            <p className="text-center text-sm text-gray-500">
+              Ainda não tem conta? <a href="/cadastro" className="underline text-black">Cadastre-se</a>
+            </p>
+          </form>
+        </div>
+      </motion.div>
     </div>
   );
 }
-
-export default Login;
