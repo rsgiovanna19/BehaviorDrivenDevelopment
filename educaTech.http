@@ -1,0 +1,6 @@
+@educaTech_HostAddress = http://localhost:5294
+
+GET {{educaTech_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
