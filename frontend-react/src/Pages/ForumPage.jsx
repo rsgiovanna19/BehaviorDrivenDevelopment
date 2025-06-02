@@ -44,6 +44,7 @@ export default function ForumPage() {
         <button onClick={() => window.location.href = '/home'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Home</button>
         <button onClick={() => window.location.href = '/desafios'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Desafios</button>
         <button onClick={() => window.location.href = '/tutoriais'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Tutoriais</button>
+        <button onClick={() => window.location.href = '/bdd'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">BDD</button>
       </div>
 
       <div className="max-w-3xl mx-auto p-6">
