@@ -28,45 +28,55 @@ export default function MainPage() {
         {/* Cabeçalho */}
         <div className="mb-10">
           <h1 className="text-3xl md:text-4xl font-bold flex items-center gap-2">
-            Olá, {primeiroNome} 
+            Olá, {primeiroNome}
           </h1>
           <p className="text-gray-300 mt-2">
             Bem-vindo ao EducaTech — aprenda programação de forma simples e moderna.
           </p>
         </div>
 
-        {/* Cards principais */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Desafios */}
-          <div
-            onClick={() => navigate('/desafios')}
-            className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
-          >
-            <img src="/desafio.png" alt="Desafios" className="w-full h-40 object-cover rounded-lg mb-4" />
-            <h2 className="text-xl font-bold mb-2"> Desafios</h2>
-            <p className="text-white">Teste seus conhecimentos em desafios práticos.</p>
-          </div>
+{/* Cards principais */}
+<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+  {/* Desafios */}
+  <div
+    onClick={() => navigate('/desafios')}
+    className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
+  >
+    <img src="/desafio.png" alt="Desafios" className="w-full h-40 object-cover rounded-lg mb-4" />
+    <h2 className="text-xl font-bold mb-2">Desafios</h2>
+    <p className="text-white">Teste seus conhecimentos em desafios práticos.</p>
+  </div>
 
-          {/* Tutoriais */}
-          <div
-            onClick={() => navigate('/tutoriais')}
-            className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
-          >
-            <img src="/tutoriais.png" alt="Tutoriais" className="w-full h-40 object-cover rounded-lg mb-4" />
-            <h2 className="text-xl font-bold mb-2"> Tutoriais</h2>
-            <p className="text-white">Aprenda com tutoriais passo a passo sobre linguagens de programação.</p>
-          </div>
+  {/* Tutoriais */}
+  <div
+    onClick={() => navigate('/tutoriais')}
+    className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
+  >
+    <img src="/tutoriais.png" alt="Tutoriais" className="w-full h-40 object-cover rounded-lg mb-4" />
+    <h2 className="text-xl font-bold mb-2">Tutoriais</h2>
+    <p className="text-white">Aprenda com tutoriais passo a passo sobre linguagens de programação.</p>
+  </div>
 
-          {/* Fórum */}
-          <div
-            onClick={() => navigate('/forumpage')}
-            className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
-          >
-            <img src="/forum.png" alt="Fórum" className="w-full h-40 object-cover rounded-lg mb-4" />
-            <h2 className="text-xl font-bold mb-2"> Fórum</h2>
-            <p className="text-white-600">Tire dúvidas, compartilhe código e ajude outros estudantes.</p>
-          </div>
-        </div>
+  {/* Fórum */}
+  <div
+    onClick={() => navigate('/forumpage')}
+    className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
+  >
+    <img src="/forum.png" alt="Fórum" className="w-full h-40 object-cover rounded-lg mb-4" />
+    <h2 className="text-xl font-bold mb-2">Fórum</h2>
+    <p className="text-white">Tire dúvidas, compartilhe código e ajude outros estudantes.</p>
+  </div>
+
+  {/* Explorar BDD */}
+  <div
+    onClick={() => navigate('/bdd')}
+    className="cursor-pointer bg-[#1c1c1e] text-white p-6 rounded-2xl shadow-lg hover:shadow-2xl hover:-translate-y-1 transform transition duration-300"
+  >
+    <img src="/bdd.png" alt="Explorar BDD" className="w-full h-40 object-cover rounded-lg mb-4" />
+    <h2 className="text-xl font-bold mb-2">Explorar BDD</h2>
+    <p className="text-white">Entenda e pratique a metodologia Behavior-Driven Development na prática.</p>
+  </div>
+</div>
       </div>
     </div>
   );

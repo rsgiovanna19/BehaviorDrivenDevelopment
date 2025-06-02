@@ -38,6 +38,7 @@ export default function TutoriaisPage() {
         <button onClick={() => window.location.href = '/home'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Home</button>
         <button onClick={() => window.location.href = '/desafios'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Desafios</button>
         <button onClick={() => window.location.href = '/forumpage'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">Fórum</button>
+        <button onClick={() => window.location.href = '/bdd'} className="text-white hover:bg-white hover:text-black px-4 py-2 rounded transition">BDD</button>
       </div>
 
       <div className="p-8 max-w-4xl mx-auto">

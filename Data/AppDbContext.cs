@@ -11,6 +11,7 @@ namespace educaTech.Data
         public DbSet<Topico> Topicos { get; set; }
         public DbSet<Resposta> Respostas { get; set; }
         public DbSet<Desafio> Desafios { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

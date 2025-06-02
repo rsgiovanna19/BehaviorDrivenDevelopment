@@ -5,6 +5,7 @@ import MainPage from './Pages/MainPage';
 import Desafios from './Pages/Desafios'; 
 import Tutoriais from './Pages/Tutoriais';
 import ForumPage from './Pages/ForumPage';
+import BddPage from './Pages/BddPage'
 
 function App() {
   return (
@@ -15,7 +16,8 @@ function App() {
         <Route path="/home" element={<MainPage />} />
         <Route path="/desafios" element={<Desafios />} />
         <Route path="/tutoriais" element={<Tutoriais />} />
-        <Route path="/forumpage" element={<ForumPage />} /> 
+        <Route path="/forumpage" element={<ForumPage />} />
+        <Route path="/bdd" element={<BddPage />} /> 
         <Route path="/" element={<Login />} />
       </Routes>
     </BrowserRouter>
